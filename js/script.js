@@ -2,12 +2,17 @@
 const profileInfo = document.querySelector(".overview");
 //Githubusername
 const username = "dcunivers";
+
+//Select unordered list to show repos list
+const repoList = document.querySelector(".repo-list");
+
 //Fetch info from Github profile
 const getGithubData =  async function() {
     const userInfo = await fetch(`https://api.github.com/users/${username}`);
     const data = await userInfo.json();
     //console.log(data);
-    fetchUserData();
+
+    fetchUserData(data);
 };
 
 getGithubData();
@@ -27,5 +32,23 @@ const fetchUserData = function (data) {
             <p><strong>Number of public repos:</strong> ${data.public_repos}</p>
         </div> `;
         profileInfo.append(div);
+        
+        fetchRepos();
 };
 
+const fetchRepos = async function () {
+    const fetchRepoData = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+    const repoData = await fetchRepoData.json();
+    //console.log(repoData);
+    displayRepo(repoData);
+};
+
+//Displays info about each repo
+const displayRepo = function (repos) {
+    for (const repo of repos) {
+        const repoItems = document.createElement("li");
+        repoItems.classList.add("repo");
+        repoItems.innerHTML = `<h3>${repo.name}</h3>`;
+        repoList.append(repoItems);
+    }
+};
