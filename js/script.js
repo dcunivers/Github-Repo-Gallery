@@ -93,7 +93,7 @@ const displayRepoInfo = function (repoInfo, languages) {
         <p>Description: ${repoInfo.description}</p>
         <p>Default Branch: ${repoInfo.default_branch}</p>
         <p>Languages: ${languages.join(", ")}</p>
-        <a class="visit" href="${repoInfo.html_url}}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
+        <a class="visit" href="${repoInfo.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
     repoDataSection.append(div);
     repoDataSection.classList.remove("hide");
     repoSection.classList.add("hide");
